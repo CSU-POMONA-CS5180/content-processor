@@ -60,6 +60,11 @@ public class HTMLNoiseFilter {
 				doc.select("hr").remove();
 				doc.select("button").remove();
 				doc.select("br").remove();
+				doc.select("form").remove();
+				doc.select("nav").remove();
+				doc.select("embed").remove();
+				doc.select("footer").remove();
+				doc.select("input").remove();
 				
 				File file = new File(this.getFilterPath() + "\\html_" + (i+1) + ".html");	    	
 		    	
@@ -76,8 +81,8 @@ public class HTMLNoiseFilter {
 	}
 	
 	public static void main(String[] args) throws InterruptedException, IOException {		
-		String filter_path = "C:\\Users\\Vincent\\Desktop\\filter";
-		String html_path = "C:\\Users\\Vincent\\Desktop\\repository";
+		String filter_path = "C:\\Users\\tonym\\Desktop\\CS\\5180\\filter";
+		String html_path = "C:\\Users\\tonym\\Desktop\\CS\\5180\\repository";
 				
 		HTMLNoiseFilter hnf = new HTMLNoiseFilter(html_path, filter_path);
 		
