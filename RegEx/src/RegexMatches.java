@@ -8,17 +8,14 @@ import java.util.regex.Pattern;
 import java.io.FileWriter;
 
 public class RegexMatches {
-	   private static String anchor = "ign";
-	   private static String domain = "com";
-	   private static String final_domain = anchor + "]\\." + domain +".*";
+	   //anchor to filter out domains not related to anchor
+	   private static String anchor = "wsj";
+
 	   //patterns to match regex
 	   private static String[] REGEX = {
 			   "<li\\s*.*>\\s*<\\/li>",
 			   "<noscript>\\s*\\.*\\n*.*\\s*<\\/noscript>", 
 			   "<li\\s*[^>]*>\\s*(<[^>]*>\\s*<[^>]*>\\s*)*<\\/li>",
-			   //"<link[\\s\\S]*[^" + final_domain,
-			   //"<a[\\s\\S]*[^" + final_domain,
-			   //"<img[\\s\\S]*[^" + final_domain
 			   "<link((?!" + anchor + ").)*?>",
 			   "<a((?!" + anchor + ").)*?>",
 			   "<img((?!" + anchor + ").)*?>",
@@ -44,9 +41,9 @@ public class RegexMatches {
 	   public static void main(String[] args) { 
 		   try {			   
 			    int numFiles = countFilesInDirectory(new File("C:\\Users\\Vincent\\Desktop\\filter"));
-			    
-			    
+			    			    
 			    for (int f=1; f<=numFiles; f++) {
+			    	//read each html file from ~/filter
 			    	FileReader fileReader = new FileReader("C:\\Users\\Vincent\\Desktop\\filter\\html_"+f+".html");
 					BufferedReader bufferedReader = new BufferedReader(fileReader);
 					StringBuffer stringBuffer = new StringBuffer();
@@ -56,7 +53,8 @@ public class RegexMatches {
 						stringBuffer.append("\n");
 					}
 					fileReader.close();
-				
+					
+					//convert html file to a single string of text and replace from patterns
 					String INPUT = stringBuffer.toString();
 					for (int i=0; i<REGEX.length; i++) {
 						Pattern p = Pattern.compile(REGEX[i]);
@@ -64,6 +62,7 @@ public class RegexMatches {
 						INPUT = m.replaceAll(REPLACE[i]);
 					}
 	        	    				
+					//save a separate file with "f" indicator for filtered
 					FileWriter writer = new FileWriter("C:\\Users\\Vincent\\Desktop\\filter\\html_ " + f + "f.html", true);
 					writer.write(INPUT);
 					writer.close();					
