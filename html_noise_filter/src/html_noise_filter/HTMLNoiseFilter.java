@@ -51,20 +51,20 @@ public class HTMLNoiseFilter {
 		for (int i=0; i<this.numFiles; i++) {
 			try {
 				File input = new File(this.getHTMLPath() + "\\html_" + (i+1) + ".html");
-				Document doc = Jsoup.parse(input, "UTF-8");
-				doc.select("img").remove();
-				doc.select("a").remove();
-				doc.select("style").remove();
-				doc.select("link").remove();
+				Document doc = Jsoup.parse(input, "UTF-8");				
+				doc.select("style").remove();				
 				doc.select("script").remove();
 				doc.select("hr").remove();
 				doc.select("button").remove();
 				doc.select("br").remove();
-				doc.select("form").remove();
-				doc.select("nav").remove();
+				doc.select("form").remove();				
 				doc.select("embed").remove();
 				doc.select("footer").remove();
 				doc.select("input").remove();
+				doc.select("svg").remove();
+				doc.select("video").remove();
+				doc.select("canvas").remove();
+				doc.select("form").remove();
 				
 				File file = new File(this.getFilterPath() + "\\html_" + (i+1) + ".html");	    	
 		    	
